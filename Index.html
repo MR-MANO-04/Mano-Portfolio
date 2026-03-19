@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mano K C | Portfolio 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #6366f1; 
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--dark); color: var(--light); line-height: 1.6; }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; color: #94a3b8; margin-left: 2rem; font-weight: 500; transition: 0.3s; cursor: pointer; }
+        .nav-links a:hover { color: #fff; }
+
+        .btn-res-nav {
+            background: var(--primary);
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Hero */
+        header {
+            height: 85vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%;
+            background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%);
+        }
+        header h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; line-height: 1; }
+        header p { font-size: 1.2rem; color: #94a3b8; max-width: 650px; margin: 25px 0; }
+
+        /* Sections */
+        section { padding: 80px 10%; }
+        h2 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin-bottom: 40px; text-align: center; }
+
+        /* Projects Grid */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .project-card { 
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 24px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        
+        /* High Visibility Image Container with Pulsing Effect */
+        .project-img-wrapper { 
+            width: 100%; height: 240px; overflow: hidden; 
+            background: #1e293b; position: relative; 
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse { 0% { background: #1e293b; } 50% { background: #2d3748; } 100% { background: #1e293b; } }
+
+        .project-img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.5s ease; opacity: 0; /* Starts invisible until loaded */
+        }
+        .project-img.loaded { opacity: 1; } /* Becomes visible after load */
+        .project-card:hover .project-img { transform: scale(1.1); }
+
+        .project-info { padding: 25px; flex-grow: 1; border-top: 1px solid rgba(255,255,255,0.05); }
+        .project-info h3 { margin-bottom: 10px; color: #fff; }
+        .project-info p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 20px; }
+
+        .btn-filled { background: var(--primary); color: white; padding: 12px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; width: 100%; }
+        .btn-filled:hover { background: #4f46e5; }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
+        .skill-card {
+            background: #fff; color: #000; padding: 30px 20px; border-radius: 20px; text-align: center;
+            transition: 0.4s; display: flex; flex-direction: column; align-items: center;
+        }
+        .skill-card:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary-glow); }
+        .skill-card i { font-size: 2.5rem; margin-bottom: 12px; }
+
+        /* Contact Section */
+        .contact-box {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+            background: rgba(255,255,255,0.02); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-link { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: #94a3b8; text-decoration: none; }
+        .social-link i { width: 45px; height: 45px; background: var(--glass); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); }
+        
+        .contact-form { background: white; padding: 35px; border-radius: 20px; color: var(--dark); }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin: 10px 0 20px; border: 1px solid #e2e8f0; border-radius: 8px; }
+
+        /* Modal Terminal */
+        .modal { display: none; position: fixed; z-index: 2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; }
+        .terminal { width: 90%; max-width: 650px; background: #111; border-radius: 12px; border: 1px solid #333; overflow: hidden; }
+        .t-head { background: #222; padding: 12px; display: flex; gap: 8px; border-bottom: 1px solid #333; }
+        .t-body { padding: 25px; color: #4ade80; font-family: 'Fira Code', monospace; height: 350px; overflow-y: auto; }
+
+        @media (max-width: 900px) { .contact-box { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">MANO<span>.DEV</span></div>
+        <div class="nav-links">
+            <a href="#skills">Skills</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+            <a onclick="generateResume()" class="btn-res-nav">
+                <i class="fas fa-file-pdf"></i> Resume
+            </a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Hi, I'm <br><span>Mano K C</span></h1>
+        <p>Full Stack Developer & Data Analyst. Expert in Python, SQL, and Deep Learning. Improving data quality by 30% through analytical automation.</p>
+        <div style="display: flex; gap: 20px;">
+            <a href="#projects" class="btn-filled" style="text-decoration: none; padding: 14px 32px; width: auto;">View Projects</a>
+            <a href="https://github.com/MR-MANO-04" target="_blank" class="btn-filled" style="background: var(--glass); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 14px 32px; width: auto;"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </header>
+
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            <!-- 1. Student Management -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80" onload="this.classList.add('loaded')" alt="Student Management" class="project-img">
+                </div>
+                <div class="project-info">
+                    <h3>Student Management System</h3>
+                    <p>Automated academic record-keeping with secure database synchronization.</p>
+                    <button class="btn-filled" onclick="openDemo('student')">Live Demo</button>
+                </div>
+            </div>
+
+            <!-- 2. ATM -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800&q=80" onload="this.classList.add('loaded')" alt="ATM System" class="project-img">
+                </div>
+                <div class="project-info">
+                    <h3>ATM Transaction Mgmt</h3>
+                    <p>Secure interface featuring real-time validation and encrypted PIN authentication.</p>
+                    <button class="btn-filled" onclick="openDemo('atm')">Live Demo</button>
+                </div>
+            </div>
+
+            <!-- 3. Target Detection -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" onload="this.classList.add('loaded')" alt="Target Detection" class="project-img">
+                </div>
+                <div class="project-info">
+                    <h3>Human Target Detection</h3>
+                    <p>Ministry of Defence DL project achieving 95.8% accuracy using TensorFlow.</p>
+                    <button class="btn-filled" onclick="openDemo('dl')">Live Demo</button>
+                </div>
+            </div>
+
+            <!-- 4. Banking -->
+            <div class="project-card">
+                <div class="project-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?w=800&q=80" onload="this.classList.add('loaded')" alt="Banking System" class="project-img">
+                </div>
+                <div class="project-info">
+                    <h3>Banking Management System</h3>
+                    <p>Optimized 3NF relational database designed for 5,000+ users.</p>
+                    <button class="btn-filled" onclick="openDemo('bank')">Live Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card"><i class="fab fa-python" style="color:#3776ab"></i><span>Python</span></div>
+            <div class="skill-card"><i class="fas fa-database" style="color:#f29111"></i><span>MySQL</span></div>
+            <div class="skill-card"><i class="fab fa-js" style="color:#f7df1e"></i><span>JavaScript</span></div>
+            <div class="skill-card"><i class="fas fa-chart-line" style="color:#00a4ef"></i><span>Power BI</span></div>
+            <div class="skill-card"><i class="fab fa-html5" style="color:#e34c26"></i><span>HTML5</span></div>
+            <div class="skill-card"><i class="fab fa-css3-alt" style="color:#264de4"></i><span>CSS3</span></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-box">
+            <div class="contact-details">
+                <h3>Let's Connect</h3>
+                <p style="color: #94a3b8; margin-bottom: 30px;">Open for collaborations and full-time roles.</p>
+                <a href="mailto:manosekar190803@gmail.com" class="social-link"><i><i class="fas fa-envelope"></i></i> manosekar190803@gmail.com</a>
+                <a href="https://linkedin.com/in/mano-k-c" target="_blank" class="social-link"><i><i class="fab fa-linkedin-in"></i></i> LinkedIn</a>
+                <a href="https://github.com/MR-MANO-04" target="_blank" class="social-link"><i><i class="fab fa-github"></i></i> GitHub: MR-MANO-04</a>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="hidden" name="access_key" value="a6122196-6987-4397-b1f7-a37ce3719a0f">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Mano K C" required>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+                <label>Message</label>
+                <textarea name="message" rows="4" placeholder="How can I help you?" required></textarea>
+                <button type="submit" class="btn-filled" id="sendBtn">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <div id="demoModal" class="modal">
+        <div class="terminal">
+            <div class="t-head">
+                <div style="width:12px;height:12px;background:#ff5f56;border-radius:50%"></div>
+                <div style="width:12px;height:12px;background:#ffbd2e;border-radius:50%"></div>
+                <div style="width:12px;height:12px;background:#27c93f;border-radius:50%"></div>
+                <span style="margin-left:auto;cursor:pointer;color:#888" onclick="closeModal()">× Close</span>
+            </div>
+            <div class="t-body" id="tOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        const tOutput = document.getElementById('tOutput');
+        const demoScripts = {
+            student: ["$ initializing student_management.py", "Connected to Registry...", "Searching ID: 2026-001", "Output: Mano K C | Status: Enrolled", "Updating Records... Success."],
+            atm: ["$ python3 atm_auth.py", "PIN Encrypted Handshake...", "Balance Check: ₹1,50,000", "Transaction: Successful", "Logging to MySQL... Done."],
+            dl: ["$ loading model_v3.h5", "Processing 1M data points...", "Detection Accuracy: 95.8%", "Target Identified.", "Inference Time: 40ms"],
+            bank: ["$ mysql -u root < bank_setup.sql", "Normalizing to 3NF Schema...", "Trigger: auto_balance_update fired.", "Indexing complete.", "Retrieval improvement: 30% faster."]
+        };
+
+        async function openDemo(key) {
+            document.getElementById('demoModal').style.display='flex';
+            tOutput.innerHTML = "";
+            for (let line of demoScripts[key]) {
+                let div = document.createElement('div');
+                div.innerText = line;
+                tOutput.appendChild(div);
+                await new Promise(r => setTimeout(r, 600));
+            }
+        }
+
+        function closeModal() { document.getElementById('demoModal').style.display='none'; }
+
+        function generateResume() {
+            const resumeWindow = window.open('', '_blank');
+            resumeWindow.document.write(`
+                <html>
+<head>
+<title>Mano K C - Resume</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; color: #333; line-height: 1.5; max-width: 800px; margin: auto; }
+h1 { color: #6366f1; }
+h2 { border-bottom: 2px solid #6366f1; padding-bottom: 5px; margin-top: 20px; font-size: 1.2rem; }
+.item { margin-bottom: 15px; }
+ul { padding-left: 20px; }
+@media print { .no-print { display: none; } }
+.btn-print { background: #6366f1; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<button class="no-print btn-print" onclick="window.print()">Download/Print PDF</button>
+
+<h1>MANO K C</h1>
+<p>Chennai, India | manosekar190803@gmail.com | +917449276177 | LinkedIn: in/mano-k-c</p>
+
+<h2>SUMMARY</h2>
+<p>
+Aspiring Full Stack Developer and Data Analyst with strong experience in Python, SQL, and end-to-end application development.
+Skilled in data cleaning, database design, and building scalable web applications. Improved data quality by 30% and efficiency
+by 40% through analytical solutions. Seeking to contribute technical and analytical expertise to a growth-oriented organization.
+</p>
+
+<h2>EXPERIENCE</h2>
+<div class="item">
+<strong>Data Analyst Intern | Afame Technologies</strong> (May 2024 - June 2024, Remote)
+<ul>
+<li>Performed data cleaning and preprocessing on datasets with over 500,000 records, improving data quality by 30%.</li>
+<li>Analyzed customer data to identify trends, increasing user engagement by 20%.</li>
+<li>Developed Tableau dashboards reducing reporting time by 40%.</li>
+</ul>
+</div>
+
+<h2>PROJECTS</h2>
+
+<div class="item">
+<strong>ATM Transaction Management | Python & SQL</strong>
+<p>
+Developed a secure ATM transaction system with PIN authentication and real-time balance validation.
+Implemented deposit, withdrawal, and transaction logging with ACID-compliant operations.
+Optimized performance using modular programming and SQL query tuning.
+</p>
+</div>
+
+<div class="item">
+<strong>Banking Management System | Advanced SQL</strong>
+<p>
+Designed a normalized relational database managing 500+ customers and 5,000+ transactions.
+Automated operations using stored procedures and triggers, improving efficiency by 40%.
+Enhanced performance of complex queries by 30%.
+</p>
+</div>
+
+<div class="item">
+<strong>Robust Human Target Detection | Deep Learning</strong>
+<p>
+Developed detection algorithms achieving 95% accuracy using TensorFlow.
+Processed over 1 million data points and improved detection speed by 40%.
+</p>
+</div>
+
+<h2>EDUCATION</h2>
+<p>B.Tech Artificial Intelligence & Data Science | Rajalakshmi Institute of Technology, Chennai (2025) | CGPA: 7.67</p>
+
+<h2>CERTIFICATIONS</h2>
+<ul>
+<li>Cyber Security – CISCO Networking Academy (2023)</li>
+<li>Microsoft Power BI – ICT Academy (2022)</li>
+</ul>
+
+<h2>SKILLS</h2>
+<p>
+<b>Programming:</b> Python, SQL, JavaScript<br>
+<b>Databases:</b> MySQL<br>
+<b>Data & BI Tools:</b> MS Excel, Power BI<br>
+<b>Machine Learning:</b> TensorFlow, NLP<br>
+<b>Web Technologies:</b> HTML, CSS<br>
+<b>Tools:</b> VS Code, Jupyter Notebook, PyCharm
+</p>
+
+</body>
+</html>
+            `);
+            resumeWindow.document.close();
+        }
+
+        document.getElementById('contactForm').addEventListener("submit", function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('sendBtn');
+            btn.innerHTML = "Sending...";
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            }).then(() => {
+                alert("Success! Message sent.");
+                btn.innerHTML = "Message Sent! ✓";
+                e.target.reset();
+            });
+        });
+    </script>
+</body>
+</html>
